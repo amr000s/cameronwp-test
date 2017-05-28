@@ -1,55 +1,47 @@
-## Website Performance Optimization portfolio project
+# Website Performance Optimization Project
 
-Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).
+To see a live WebOptimized Project demo, please visit https://amr000s.github.io/cameronwp-webOptimized/
 
-To get started, check out the repository and inspect the code.
+PageSpeed Insights has calculated a score of **95** for Mobile and **96** for Desktop.
 
-### Getting started
+## Part 1: Optimizing PageSpeed Insight score for index.html
 
-#### Part 1: Optimize PageSpeed Insights score for index.html
+**Optimizations:**
 
-Some useful tips to help you get started:
+- Replaced the jpg file with png and reduced the size using tinypng.com
+- Add style elements into html file
+- Minified style.css, renamed it style-min.css and inlined the styel-min.css within index.html
+- Added async to the JS script tags and moved them to the bottom of index.html
+- Added Web Font loader to bottom of index.html
+- Added google anylatics to bottom of index.html
 
-1. Check out the repository
-1. To inspect the site on your phone, you can run a local server
+## Part 2: Optimizing Frames per Second in main.js
 
-  ```bash
-  $> cd /path/to/your-project-folder
-  $> python -m SimpleHTTPServer 8080
-  ```
+**Optimization:**
 
-1. Open a browser and visit localhost:8080
-1. Download and install [ngrok](https://ngrok.com/) to the top-level of your project directory to make your local server accessible remotely.
+- Reduced for-loop calculation by:
+  - Placing (document.body.scrollTop / 1250) into a variable (`var top = document.body.scrollTop / 1250`) outside the loop but still in the updatePosition function.
+  - Pushed items.length into variable (`var cachedLength = items.length`)
+  - Created `var items` and placed it above the `var pizzaIngredients = {}`
+  - items = documents.getElementsByClassName('mover') created and placed above updatePositions () because we only need to query items after they're made and before they need to be used.
+  - Created `var phase` and `var topSide`.
+  - The for-loop contains constArray.push(Math.sin(top + i)); allowing it to run faster.
+- Repositioned pizzas with this:
+  - `inserted items[i].style.transform = 'translateX(' + (100 * phase) + 'px)';`
+- Replaced querySelector's with getElementById to increase scroll and page rendering.
+- Saved the array length , which is part of the condition statement, in a local variable (`var len`), so the array's length property is not accessed to check its value at each iteration. (i.e. more efficiency).
+- Declared the pizzasDiv variable (`var pizzasDiv`) outside the loop, so only DOM call is made.
+- Calculated the number of pizzas needed to fill the screen, based on browser window resolution.
+- Declared `var elem` outside the for-loop to prevent it from being created every time the loop is executed.
+- Declared `var movingPizzas` outside for-loop as var movingPizzas = document.getElementById('movingPizzas1');
+   - /** Inside the for statement / loop – this line*/
+   - movingPizzas.appendChild(elem);
+- Created `var newWidth` and placed it above function changePizzaSlices(size)
 
-  ``` bash
-  $> cd /path/to/your-project-folder
-  $> ./ngrok http 8080
-  ```
+## Part 3: Optimizing Pizza slider in main.js
 
-1. Copy the public URL ngrok gives you and try running it through PageSpeed Insights! Optional: [More on integrating ngrok, Grunt and PageSpeed.](http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/)
-
-Profile, optimize, measure... and then lather, rinse, and repeat. Good luck!
-
-#### Part 2: Optimize Frames per Second in pizza.html
-
-To optimize views/pizza.html, you will need to modify views/js/main.js until your frames per second rate is 60 fps or higher. You will find instructive comments in main.js. 
-
-You might find the FPS Counter/HUD Display useful in Chrome developer tools described here: [Chrome Dev Tools tips-and-tricks](https://developer.chrome.com/devtools/docs/tips-and-tricks).
-
-### Optimization Tips and Tricks
-* [Optimizing Performance](https://developers.google.com/web/fundamentals/performance/ "web performance")
-* [Analyzing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/analyzing-crp.html "analyzing crp")
-* [Optimizing the Critical Rendering Path](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/optimizing-critical-rendering-path.html "optimize the crp!")
-* [Avoiding Rendering Blocking CSS](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/render-blocking-css.html "render blocking css")
-* [Optimizing JavaScript](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/adding-interactivity-with-javascript.html "javascript")
-* [Measuring with Navigation Timing](https://developers.google.com/web/fundamentals/performance/critical-rendering-path/measure-crp.html "nav timing api"). We didn't cover the Navigation Timing API in the first two lessons but it's an incredibly useful tool for automated page profiling. I highly recommend reading.
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/eliminate-downloads.html">The fewer the downloads, the better</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/optimize-encoding-and-transfer.html">Reduce the size of text</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/image-optimization.html">Optimize images</a>
-* <a href="https://developers.google.com/web/fundamentals/performance/optimizing-content-efficiency/http-caching.html">HTTP caching</a>
-
-### Customization with Bootstrap
-The portfolio was built on Twitter's <a href="http://getbootstrap.com/">Bootstrap</a> framework. All custom styles are in `dist/css/portfolio.css` in the portfolio repo.
-
-* <a href="http://getbootstrap.com/css/">Bootstrap's CSS Classes</a>
-* <a href="http://getbootstrap.com/components/">Bootstrap's Components</a>
+**Optimization:**
+- Replaced previous for-loop function with new loop.
+- Added a switch case element to increase slider speed.
+- Put `var pizzasDiv` outside of for-loop function to increase efficiency.
+- Made `var randomPizzas` and changed the querySelectorAll element to getElementsByClassName.
