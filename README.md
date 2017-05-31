@@ -1,5 +1,5 @@
 # Website Performance Optimization Project
-
+This is the Optimized website project which has been provide by udacity.com 
 To see a live WebOptimized Project demo, please visit https://amr000s.github.io/cameronwp-webOptimized/
 
 PageSpeed Insights has calculated a score of **95** for Mobile and **96** for Desktop.
